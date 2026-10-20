@@ -1,4 +1,5 @@
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./social-config.js";
+import { openPlayerProfile } from "./player-profile.js";
 
 let clientPromise;
 const connect = () => {
@@ -87,11 +88,25 @@ export function mountSocialHub() {
     avatar.setAttribute("aria-hidden", "true");
     return avatar;
   };
-  const item = (title, desc, buttons = []) => {
+  const item = (title, desc, buttons = [], profileId = null) => {
     const row = el("div", "", "sh-list-row");
     row.append(makeAvatar(title));
     const words = el("div", "", "sh-list-copy");
-    words.append(el("strong", title), el("small", desc));
+    if (profileId) {
+      const profileButton = el("button", title, "sh-profile-name");
+      profileButton.type = "button";
+      profileButton.setAttribute("aria-label", "Ver perfil de " + title);
+      profileButton.addEventListener("click", () => {
+        if (view.db) openPlayerProfile({
+          db: view.db,
+          playerId: profileId,
+          onFriendsChanged: () => loadData()
+        });
+      });
+      words.append(profileButton, el("small", desc));
+    } else {
+      words.append(el("strong", title), el("small", desc));
+    }
     row.append(words);
     if (buttons.length) {
       const buttonsBox = el("div", "", "sh-row-actions");
@@ -117,15 +132,15 @@ export function mountSocialHub() {
     find("sh-request-count").textContent = String(incoming.length);
 
     list("sh-friends", view.profiles.filter((p) => friends.has(p.id)).map((p) =>
-      item(p.username, "✓ Amigo · " + p.edition, [["Chatear", () => openChat("direct", p.id, p.username), "sh-accent"]])
+      item(p.username, "✓ Amigo · " + p.edition, [["Chatear", () => openChat("direct", p.id, p.username), "sh-accent"]], p.id)
     ), "Todavía no tienes amigos. ¡Explora jugadores!");
 
     list("sh-requests", [
       ...incoming.map((r) => item(nameOf(r.sender_id), "Quiere ser tu amigo", [
         ["Aceptar", () => respond(r.id, "accepted"), "sh-accent"], ["No", () => respond(r.id, "rejected")]
-      ])),
+      ], r.sender_id)),
       ...view.requests.filter((r) => r.sender_id === myId && r.status === "pending")
-        .map((r) => item(nameOf(r.receiver_id), "Solicitud enviada"))
+        .map((r) => item(nameOf(r.receiver_id), "Solicitud enviada", [], r.receiver_id))
     ], "No hay solicitudes pendientes.");
 
     const matches = view.profiles.filter((p) => p.id !== myId && p.username.toLowerCase().includes(search));
@@ -136,7 +151,7 @@ export function mountSocialHub() {
       if (friends.has(p.id)) buttons = [["Abrir chat", () => openChat("direct", p.id, p.username), "sh-accent"]];
       else if (incomingRequest) buttons = [["Aceptar", () => respond(incomingRequest.id, "accepted"), "sh-accent"]];
       else if (!waiting) buttons = [["+ Añadir", () => sendFriendRequest(p.id), "sh-accent"]];
-      return item(p.username, p.edition + (p.bio ? " · " + p.bio : "") + (waiting ? " · Pendiente" : ""), buttons);
+      return item(p.username, p.edition + (p.bio ? " · " + p.bio : "") + (waiting ? " · Pendiente" : ""), buttons, p.id);
     }), search ? "No encontramos jugadores con ese nombre." : "Aún no hay otros jugadores registrados. Invita a un amigo.");
 
     const memberOf = (g) => view.members.some((m) => m.group_id === g.id && m.user_id === myId);
