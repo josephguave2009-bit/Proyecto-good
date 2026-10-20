@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#0c121e" />
+    <meta
+      name="description"
+      content="SPAWNLY — Aparece, conecta y juega. Encuentra tu equipo de Minecraft Java y Bedrock en esta demostración de comunidad."
+    />
+    <title>SPAWNLY — Aparece, conecta y juega</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <div class="announcement">
+      <span class="announcement-spark">✦</span> Hay mundos que solo se descubren
+      juntos.
+      <span class="announcement-label">Bienvenido a tu próximo equipo.</span
+      ><span class="announcement-demo">MODO DEMOSTRACIÓN</span>
+    </div>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#inicio" aria-label="Spawnly, inicio"
+          ><span class="brand-mark" aria-hidden="true"><i></i></span
+          ><span>spawnly<span class="brand-dot">.</span></span></a
+        >
+        <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+          <a href="#inicio" data-route="inicio">Inicio</a
+          ><a href="#jugadores" data-route="jugadores">Explorar jugadores</a
+          ><a href="#grupos" data-route="grupos">Grupos</a
+          ><a href="#comunidad" data-route="comunidad">Comunidad</a>
+        </nav>
+        <div class="header-actions">
+          <button
+            class="icon-button notification-button"
+            data-info="welcome"
+            aria-label="Notificaciones de demostración"
+          >
+            <svg
+              width="19"
+              height="19"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path
+                d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"
+              /></svg
+            ><span></span></button
+          ><button class="login-button" data-auth="login">Iniciar sesión</button
+          ><button class="btn btn-primary btn-sm" data-auth="register">
+            Registrarse
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              aria-hidden="true"
+            >
+              <path d="M6 18 18 6M6 6h12v12" />
+            </svg></button
+          ><button
+            class="icon-button menu-button"
+            aria-label="Abrir navegación"
+            aria-controls="main-nav"
+            aria-expanded="false"
+          >
+            <svg
+              width="23"
+              height="23"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main-content" tabindex="-1">
+      <div class="initial-loading" role="status">
+        <span class="loading-cube"></span>Preparando tu punto de aparición…
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-main section-wrap">
+        <div>
+          <a class="brand" href="#inicio"
+            ><span class="brand-mark" aria-hidden="true"><i></i></span
+            ><span>spawnly<span class="brand-dot">.</span></span></a
+          >
+          <p>
+            Aparece, conecta y juega.<br />Un lugar donde comienzan nuevas
+            amistades.
+          </p>
+        </div>
+        <div class="footer-links">
+          <div>
+            <strong>Explora</strong><a href="#jugadores">Jugadores</a
+            ><a href="#grupos">Grupos</a><a href="#comunidad">Comunidad</a>
+          </div>
+          <div>
+            <strong>Conócenos</strong><a href="#spawny">Conoce a Spawny</a
+            ><button data-info="rules">Normas de comunidad</button
+            ><button data-info="privacy">Privacidad y seguridad</button>
+          </div>
+        </div>
+        <div class="footer-signoff">
+          <span class="status-dot"></span> Hecho para jugar en compañía.<small
+            >Solo necesitas ganas de compartir.</small
+          >
+        </div>
+      </div>
+      <div class="footer-bottom section-wrap">
+        <span
+          >© <span id="year">2026</span> Spawnly · Demo independiente, sin
+          afiliación con Mojang o Microsoft.</span
+        ><button data-reset>Restablecer demo</button
+        ><span
+          >Construido con <span class="green">♥</span> y muchos bloques.</span
+        >
+      </div>
+    </footer>
+    <dialog id="app-dialog" aria-label="Información de Spawnly">
+      <div id="dialog-content"></div>
+    </dialog>
+    <div
+      class="toast-region"
+      id="toast-region"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+    <noscript
+      ><p class="noscript-message">
+        Activa JavaScript para explorar los perfiles y usar la demostración de
+        Spawnly.
+      </p></noscript
+    >
+  </body>
+</html>
