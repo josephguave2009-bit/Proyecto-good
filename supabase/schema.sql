@@ -101,3 +101,7 @@ create policy "Escribir chat grupal" on public.group_messages for insert to auth
  with check(sender_id=(select auth.uid()) and public.is_group_member(group_id,(select auth.uid())));
 -- Realtime requiere habilitar manualmente direct_messages y group_messages en
 -- Database > Publications > supabase_realtime, si no, el cliente sondea cada 5s.
+
+-- Solo puede cambiarse el estado de una solicitud; no su remitente ni destinatario.
+revoke update on public.friend_requests from authenticated;
+grant update(status) on public.friend_requests to authenticated;
