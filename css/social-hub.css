@@ -152,3 +152,40 @@
 #community-live .cl-discussion .sh-muted a{color:#bafa8e;text-decoration:underline}
 @media(max-width:600px){#community-live .cl-post{padding:14px}#community-live .cl-discussion{padding:11px}#community-live .cl-comment{margin-left:calc(var(--reply-depth,0)*9px)}#community-live .cl-reactions{gap:8px}#community-live .cl-react{padding:8px 10px;font-size:12px}#community-live .cl-remove{margin-left:0}#community-live .cl-compose-bottom{align-items:flex-end}#community-live .cl-compose-bottom small{max-width:145px}}
 @media(prefers-reduced-motion:reduce){#community-live .cl-react{transition:none}}
+
+/* Public player profile popover: accounts, friendship state and accessible actions. */
+#community-live .cl-author-button,
+#social-hub .sh-profile-name{background:none;border:0;padding:0;text-align:left;font:inherit;cursor:pointer;color:#b6f88c;font-weight:800;overflow-wrap:anywhere}
+#community-live .cl-author-button:hover,
+#social-hub .sh-profile-name:hover{text-decoration:underline;text-underline-offset:3px;color:#d6ffad}
+#community-live .cl-author-button:focus-visible,
+#social-hub .sh-profile-name:focus-visible{outline:2px solid #b6f88c;outline-offset:4px;border-radius:3px}
+#social-hub .sh-profile-name{max-width:100%}
+.sh-public-profile{width:min(94vw,520px);max-width:520px;max-height:min(89vh,740px);background:#10222c;border:1px solid #6c9583;border-radius:21px;color:#e8f3ee;box-shadow:0 24px 90px #000b;padding:0;overflow:auto}
+.sh-public-profile::backdrop{background:rgba(4,13,20,.83);backdrop-filter:blur(5px)}
+.sh-public-profile-shell{padding:26px}
+.sh-public-profile-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:17px;border-bottom:1px solid #35535b}
+.sh-public-profile-top span{font-size:11px;letter-spacing:.12em;font-weight:850;color:#b6f88c}
+.sh-public-profile-close{border:1px solid #48636c;background:#19333e;color:#edf7f1;display:grid;place-items:center;width:39px;height:39px;border-radius:12px;cursor:pointer;font-size:26px;line-height:1}
+.sh-public-profile-close:hover{background:#294953}
+.sh-public-profile-heading{display:flex;align-items:center;gap:18px;margin-top:24px}
+.sh-public-profile-avatar{display:grid;place-items:center;flex:0 0 77px;width:77px;height:77px;border:2px solid #91e58b;border-radius:20px;background:linear-gradient(130deg,#29674b,#2b635d);color:#e9ffe4;font-size:27px;font-weight:900;text-transform:uppercase;box-shadow:0 5px 23px #030a1166}
+.sh-public-profile-heading h2{font-size:clamp(23px,4vw,31px);margin:0 0 10px;color:#fff;line-height:1.16;overflow-wrap:anywhere}
+.sh-public-profile-pill{display:inline-flex;align-items:center;gap:5px;border-radius:100px;padding:5px 11px;background:#a8f57812;border:1px solid #7bba784d;color:#c5f5b3;font-size:12px;font-weight:700}
+.sh-public-profile-info{background:#152e38;border:1px solid #3b5c5c;border-radius:15px;padding:17px;margin-top:20px}
+.sh-public-profile-info h3{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#b6f88c;margin:0 0 10px}
+.sh-public-profile-info p{color:#deeae6;line-height:1.65;font-size:14px;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.sh-public-profile-info .sh-public-profile-since{color:#a9c4be;font-size:11px;margin-top:15px}
+.sh-public-profile-relationship{margin:21px 0 14px;font-weight:800;font-size:14px;color:#dbefdf}
+.sh-public-profile-actions{display:flex;flex-wrap:wrap;gap:10px}
+.sh-public-profile-actions button,.sh-public-profile-actions a,.sh-public-profile-access .sh-primary{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;cursor:pointer;border-radius:11px;border:0;background:#a8f578;color:#19351d;font-weight:850;font-size:13px;padding:13px 18px;min-height:44px}
+.sh-public-profile-actions button:hover,.sh-public-profile-actions a:hover,.sh-public-profile-access .sh-primary:hover{background:#c6ff9f}
+.sh-public-profile-actions button:disabled{opacity:.65;cursor:wait}
+.sh-public-profile-feedback{color:#c9f5a3;font-size:13px;margin:13px 0;line-height:1.5}
+.sh-public-profile-security{color:#91adb0;font-size:11px;line-height:1.6;margin-top:19px}
+.sh-public-profile-access{padding:20px 0 6px}
+.sh-public-profile-access h2{font-size:24px;color:#eff9ee;margin:0 0 10px}
+.sh-public-profile-access p{line-height:1.7;color:#c0d3cf;font-size:14px;margin:0 0 21px}
+.sh-public-profile button:focus-visible,.sh-public-profile a:focus-visible{outline:3px solid #c8ffad;outline-offset:3px}
+@media(max-width:550px){.sh-public-profile-shell{padding:17px}.sh-public-profile-heading{gap:12px}.sh-public-profile-avatar{width:62px;height:62px;flex-basis:62px;border-radius:16px;font-size:23px}.sh-public-profile-top span{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.sh-public-profile::backdrop{backdrop-filter:none}}

@@ -1,5 +1,6 @@
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./social-config.js";
 import { escapeHTML as e } from "./utils/html.js";
+import { openPlayerProfile } from "./player-profile.js";
 let promise;
 const connect = () => promise ||= import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm").then(({createClient})=>createClient(SUPABASE_URL,SUPABASE_ANON_KEY)).catch(err=>{promise=null;throw err;});
 const modes=["Survival","Hardcore","PvP","Skyblock","Creativo"];
@@ -28,7 +29,7 @@ export function mountCommunityLive() {
     const isOwner = user?.id === comment.author_id;
     const replying = replyTo.get(postId) === comment.id;
     return `<div class="cl-comment" style="--reply-depth:${Math.min(level,2)}">
-      <div class="cl-comment-meta"><strong>${clean(author)}</strong><small>${clean(new Date(comment.created_at).toLocaleString("es-EC"))}</small></div>
+      <div class="cl-comment-meta"><button class="cl-author-button" type="button" data-cl-profile="${clean(comment.author_id)}" aria-label="Ver perfil de ${clean(author)}">${clean(author)}</button><small>${clean(new Date(comment.created_at).toLocaleString("es-EC"))}</small></div>
       <p>${clean(comment.body)}</p>
       <div class="cl-comment-actions">
         <button type="button" class="sh-quiet" data-cl-reply="${clean(comment.id)}" data-cl-post="${clean(postId)}">Responder</button>
@@ -95,7 +96,7 @@ export function mountCommunityLive() {
         const showComments = expanded.has(p.id);
         const count = commentCounts.get(p.id) || 0;
         return `<article class="cl-post">
-          <div class="cl-post-head"><strong>${clean(username)}</strong><small>${clean(new Date(p.created_at).toLocaleDateString("es-EC"))}</small></div>
+          <div class="cl-post-head"><button class="cl-author-button" type="button" data-cl-profile="${clean(p.author_id)}" aria-label="Ver perfil de ${clean(username)}">${clean(username)}</button><small>${clean(new Date(p.created_at).toLocaleDateString("es-EC"))}</small></div>
           <div class="cl-post-tags"><span>${clean(p.edition)}</span><span>${clean(p.mode)}</span></div>
           <h3>${clean(p.title)}</h3><p>${clean(p.description)}</p>
           <div class="cl-reactions">
@@ -178,6 +179,10 @@ export function mountCommunityLive() {
     const button = event.target.closest("button");
     if (!button || !root.contains(button)) return;
     if (button.id === "cl-refresh") { await auth(); return; }
+    if (button.dataset.clProfile) {
+      await openPlayerProfile({ db, playerId: button.dataset.clProfile, onFriendsChanged: () => {} });
+      return;
+    }
     if (button.dataset.clExpand) {
       const id = button.dataset.clExpand;
       if (expanded.has(id)) expanded.delete(id); else expanded.add(id);
