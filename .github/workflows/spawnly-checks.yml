@@ -20,4 +20,4 @@ jobs:
         run: |
           for file in js/*.js js/pages/*.js js/components/*.js; do node --check "$file"; done
       - name: Unit tests
-        run: node --test tests/store.test.mjs tests/social-hub.test.mjs
+        run: node --test tests/*.test.mjs
