@@ -72,7 +72,7 @@ export function home() {
           Minecraft. Porque jugar acompañado siempre es mejor.
         </p>
         <div class="hero-buttons">
-          <a class="btn btn-primary btn-lg" href="#social"
+          <a class="btn btn-primary btn-lg" href="#jugadores"
             >${icon("users", 19)} Encontrar amigos reales ${icon("arrowUp", 17)}</a
           ><a class="btn btn-secondary btn-lg" href="#comunidad"
             >Explorar comunidad ${icon("arrow", 17)}</a
@@ -80,16 +80,7 @@ export function home() {
         </div>
         <div class="hero-proof">
           <div class="tiny-avatars">
-            ${repository
-              .getPlayers()
-              .slice(0, 4)
-              .map(
-                (p) =>
-                  /* HTML */ `<span style="--av:${e(p.color)}"
-                    >${e(p.initials)}</span
-                  >`,
-              )
-              .join("")}
+<span class="lp-home-avatar-empty">✦</span>
           </div>
           <span
             >Un buen equipo empieza con un <strong>«hola».</strong
@@ -152,7 +143,7 @@ export function home() {
           ><small>La amistad es nuestro mejor loot.</small></span
         >
       </div>
-      <span class="demo-pill">DEMO INTERACTIVA</span>
+      <a class="demo-pill" href="#social">CUENTAS REALES DISPONIBLES</a>
     </div>
     <section class="section-wrap content-section" id="home-players">
       ${sectionTitle(
@@ -163,9 +154,9 @@ export function home() {
       )}
       <div class="home-discovery">
         <div>
-          ${modeTabs("Todos")}
+          <p class="lp-home-label">JUGADORES REGISTRADOS · PERFILES REALES</p>
           <div id="home-player-results" class="player-grid">
-            ${repository.getPlayers().slice(0, 4).map(playerCard).join("")}
+            <p class="lp-home-loading">Cargando jugadores reales…</p>
           </div>
         </div>
         <aside class="spawny-tip">
@@ -186,8 +177,8 @@ export function home() {
         "#grupos",
         "Todos los grupos",
       )}
-      <div class="group-grid">
-        ${repository.getGroups().slice(0, 3).map(groupCard).join("")}
+      <div id="home-group-results" class="group-grid">
+        <p class="lp-home-loading">Cargando grupos de Spawnly…</p>
       </div>
     </section>
     <section class="section-wrap content-section home-community">
@@ -198,8 +189,8 @@ export function home() {
           "#comunidad",
           "Ver comunidad",
         )}
-        <div class="post-grid">
-          ${repository.getPosts().slice(0, 2).map(postCard).join("")}
+        <div id="home-post-results" class="post-grid">
+          <p class="lp-home-loading">Cargando publicaciones compartidas…</p>
         </div>
       </div>
       <aside class="community-note">
