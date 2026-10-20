@@ -1,11 +1,5 @@
 import { repository } from "./store.js";
-import {
-  home,
-  playersPage,
-  groupsPage,
-  communityPage,
-  spawnyPage,
-} from "./pages/views.js?v=20261020b";
+import { home, spawnyPage } from "./pages/views.js?v=20261020f";
 import {
   playerCard,
   groupCard,
@@ -25,11 +19,14 @@ import { icon, escapeHTML as e } from "./utils/html.js";
 import { spawny } from "../assets/spawny/manifest.js";
 import { socialHubView, mountSocialHub } from "./social-hub.js?v=20261020e";
 import { communityLiveView, mountCommunityLive } from "./community-live.js?v=20261020e";
+import { livePlayersView, mountLivePlayers } from "./live-players.js";
+import { liveGroupsView, mountLiveGroups } from "./live-groups.js";
+import { mountLiveHome } from "./live-home.js";
 const $ = (s) => document.querySelector(s);
 const pages = {
   inicio: home,
-  jugadores: playersPage,
-  grupos: groupsPage,
+  jugadores: livePlayersView,
+  grupos: liveGroupsView,
   comunidad: communityLiveView,
   spawny: spawnyPage,
   social: socialHubView,
@@ -48,6 +45,9 @@ const filters = {
 };
 let leaveSocial = null;
 let leaveCommunity = null;
+let leaveLiveHome = null;
+let leaveLivePlayers = null;
+let leaveLiveGroups = null;
 let currentRoute = "",
   toastTimer,
   dialogReturnFocus = "";
@@ -169,6 +169,8 @@ function renderHomePlayers() {
   });
 }
 function restoreControls() {
+  // Backend-backed routes own their real search and filter state.
+  if (["inicio", "jugadores", "grupos", "comunidad", "social"].includes(currentRoute)) return;
   if (currentRoute === "jugadores") {
     const f = filters.player;
     $("#player-search").value = f.query;
@@ -203,9 +205,15 @@ function render(scroll = false) {
   const main = $("#main-content");
   if (leaveSocial) { leaveSocial(); leaveSocial = null; }
   if (leaveCommunity) { leaveCommunity(); leaveCommunity = null; }
+  if (leaveLiveHome) { leaveLiveHome(); leaveLiveHome = null; }
+  if (leaveLivePlayers) { leaveLivePlayers(); leaveLivePlayers = null; }
+  if (leaveLiveGroups) { leaveLiveGroups(); leaveLiveGroups = null; }
   main.innerHTML = pages[currentRoute]();
   if (currentRoute === "social") leaveSocial = mountSocialHub();
   if (currentRoute === "comunidad") leaveCommunity = mountCommunityLive();
+  if (currentRoute === "inicio") leaveLiveHome = mountLiveHome();
+  if (currentRoute === "jugadores") leaveLivePlayers = mountLivePlayers();
+  if (currentRoute === "grupos") leaveLiveGroups = mountLiveGroups();
   main.classList.remove("page-enter");
   void main.offsetWidth;
   main.classList.add("page-enter");
