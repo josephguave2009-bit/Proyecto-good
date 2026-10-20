@@ -6,13 +6,13 @@
     <meta name="theme-color" content="#0c121e" />
     <meta
       name="description"
-      content="SPAWNLY — Aparece, conecta y juega. Encuentra tu equipo de Minecraft Java y Bedrock en esta demostración de comunidad."
+      content="SPAWNLY — Aparece, conecta y juega. Encuentra jugadores reales, grupos, publicaciones y chats de Minecraft Java y Bedrock."
     />
     <title>SPAWNLY — Aparece, conecta y juega</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/styles.css?v=20261020b" />
-    <link rel="stylesheet" href="css/social-hub.css?v=20261020e" />
-    <script type="module" src="js/app.js?v=20261020e"></script>
+    <link rel="stylesheet" href="css/social-hub.css?v=20261020f" />
+    <script type="module" src="js/app.js?v=20261020f"></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Saltar al contenido</a>
@@ -37,8 +37,8 @@
         <div class="header-actions">
           <button
             class="icon-button notification-button"
-            data-info="welcome"
-            aria-label="Notificaciones de demostración"
+            onclick="location.hash='social'"
+            aria-label="Ver solicitudes de amistad y mensajes"
           >
             <svg
               width="19"
@@ -122,9 +122,8 @@
       </div>
       <div class="footer-bottom section-wrap">
         <span
-          >© <span id="year">2026</span> Spawnly · Demo independiente, sin
+          >© <span id="year">2026</span> Spawnly · Comunidad independiente, sin
           afiliación con Mojang o Microsoft.</span
-        ><button data-reset>Restablecer demo</button
         ><span
           >Construido con <span class="green">♥</span> y muchos bloques.</span
         >
