@@ -93,3 +93,22 @@
 @media(max-width:790px){#social-hub.sh-page{padding-top:38px}#social-hub .sh-layout{grid-template-columns:1fr}#social-hub .sh-sidebar{display:grid;grid-template-columns:1fr 1fr}#social-hub .sh-sidebar .sh-panel:nth-child(3){grid-column:1/-1}#social-hub .sh-side-safety{grid-column:1/-1}#social-hub .sh-center{grid-row:1}#social-hub .sh-extras{grid-column:auto;grid-template-columns:1fr 1fr}#social-hub .sh-extras>.sh-panel:last-child{grid-column:1/-1}#social-hub .sh-intro-mascot{padding:0 12px}#social-hub .sh-auth{grid-template-columns:1fr;gap:0;margin:14px auto}#social-hub .sh-auth-copy{padding:6px}#social-hub .sh-auth-copy h2{margin:14px 0;font-size:30px}#social-hub .sh-auth-points{display:none}}
 @media(max-width:520px){#social-hub .sh-intro h1{font-size:30px}#social-hub .sh-intro p:not(.eyebrow){font-size:12px}#social-hub .sh-intro-mascot img{width:82px;height:108px}#social-hub .sh-intro-mascot span{display:none}#social-hub .sh-sidebar,#social-hub .sh-extras{display:flex;grid-template-columns:1fr}#social-hub .sh-sidebar .sh-panel:nth-child(3),#social-hub .sh-side-safety,#social-hub .sh-extras>.sh-panel:last-child{grid-column:auto}#social-hub .sh-panel{padding:16px}#social-hub .sh-auth-form{padding:23px}#social-hub .sh-toolbar{padding:12px;flex-wrap:wrap}#social-hub .sh-player-list .sh-list-row{flex-wrap:wrap}#social-hub .sh-player-list .sh-row-actions{width:100%;justify-content:flex-start;padding-left:56px}#social-hub .sh-chat{padding:0}#social-hub .sh-messages{height:370px}#social-hub .sh-compose .sh-primary{padding:12px}#social-hub .sh-pill{font-size:8px}#social-hub .sh-intro{gap:5px}}
 @media(prefers-reduced-motion:reduce){#social-hub .sh-action,#social-hub .sh-primary{transition:none}}
+
+/* Spawnly social beta is unmistakable on the original landing page. */
+.sh-launch{margin-top:25px;margin-bottom:20px;position:relative;min-height:175px;display:flex;gap:19px;align-items:center;isolation:isolate;overflow:hidden;padding:24px 195px 24px 26px;border-radius:22px;border:1px solid #638b6d;background:linear-gradient(112deg,#1e3b31 0%,#172b36 57%,#1d3445 100%);box-shadow:0 7px 38px #131e20}
+.sh-launch:before{content:"";position:absolute;width:330px;height:270px;right:-70px;top:-90px;border-radius:50%;background:radial-gradient(ellipse,#a6f46a2b,transparent 70%);pointer-events:none;z-index:-1}
+.sh-launch-icon{display:grid;place-items:center;flex:0 0 53px;width:53px;height:53px;background:#a6f46a1c;color:#c0ff8c;font-size:25px;border:1px solid #719967;border-radius:17px;align-self:flex-start}
+.sh-launch-main{flex:1;min-width:0}
+.sh-launch-label{display:block;color:#bcfa90;letter-spacing:.14em;font-weight:900;font-size:10px;margin-bottom:9px}
+.sh-launch h2{color:#effaf2;font-size:clamp(21px,2.15vw,30px);font-weight:900;letter-spacing:-.035em;line-height:1.15;margin:0 0 9px}
+.sh-launch h2 span{color:#b7f28b}
+.sh-launch p{color:#c4d5d6;font-size:12px;line-height:1.7;max-width:630px;margin:0 0 13px}
+.sh-launch-tags{display:flex;gap:8px;flex-wrap:wrap}
+.sh-launch-tags span{border:1px solid #719b7759;background:#a6f46a12;padding:5px 9px;border-radius:100px;color:#c7ecb9;font-size:10px;font-weight:700}
+.sh-launch-button{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex:0 0 auto;background:#a6f46a;border-radius:12px;color:#152713;font-weight:900;padding:15px 16px;white-space:nowrap;font-size:12px;z-index:1;transition:transform .2s ease}
+.sh-launch-button:hover{transform:translateY(-2px);background:#c2ff91}
+.sh-launch-mascot{position:absolute;width:105px;height:128px;object-fit:contain;right:37px;bottom:-5px;filter:drop-shadow(0 6px 12px #0006);pointer-events:none}
+@media(max-width:1100px){.sh-launch{padding-right:24px}.sh-launch-mascot{display:none}.sh-launch-button{max-width:240px;white-space:normal;text-align:center}}
+@media(max-width:760px){.sh-launch{align-items:flex-start;flex-wrap:wrap;padding:22px 20px;gap:10px}.sh-launch-icon{flex:0 0 36px;height:36px;width:36px;font-size:20px;border-radius:10px}.sh-launch-main{flex-basis:calc(100% - 49px)}.sh-launch-button{margin-left:45px;max-width:none;width:auto}.sh-launch-tags span{font-size:9px}}
+@media(max-width:450px){.sh-launch{margin-top:12px}.sh-launch-icon{display:none}.sh-launch-main{flex-basis:100%}.sh-launch-label{font-size:9px}.sh-launch h2{font-size:24px}.sh-launch-button{margin-left:0;width:100%;max-width:none;font-size:12px;padding:14px}.sh-launch-tags{gap:5px}}
+@media(prefers-reduced-motion:reduce){.sh-launch-button{transition:none}}
