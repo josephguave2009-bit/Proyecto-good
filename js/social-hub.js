@@ -313,7 +313,7 @@ export function mountSocialHub() {
     if (form.id === "sh-auth-form") run(async () => {
       const email = find("sh-email").value.trim(), password = find("sh-password").value;
       const response = view.signup
-        ? await view.db.auth.signUp({ email, password, options: { emailRedirectTo: location.origin + location.pathname + "#social" } })
+        ? await view.db.auth.signUp({ email, password, options: { emailRedirectTo: new URL("social.html", location.href).toString() } })
         : await view.db.auth.signInWithPassword({ email, password });
       guard(response);
       setStatus(view.signup ? (response.data.session ? "¡Cuenta creada!" : "Revisa tu correo y confirma tu cuenta para entrar.") : "¡Inicio de sesión correcto!");
