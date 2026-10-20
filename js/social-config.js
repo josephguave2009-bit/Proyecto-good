@@ -1,4 +1,3 @@
-// Reemplaza estos valores con Project URL y publishable/anon key de Supabase.
-// La service_role key NUNCA debe aparecer en un archivo público.
-export const SUPABASE_URL = 'https://TU-PROYECTO.supabase.co';
-export const SUPABASE_ANON_KEY = 'TU-CLAVE-PUBLICA';
+// Claves públicas para navegador; protección mediante RLS de Supabase.
+export const SUPABASE_URL = 'https://clbpmyrpevuvblhvvpxk.supabase.co';
+export const SUPABASE_ANON_KEY = 'sb_publishable_XSzswvXKrwu8pnpE4DIflg_G2iVBoQo';
