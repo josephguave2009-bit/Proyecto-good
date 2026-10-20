@@ -24,12 +24,13 @@ import {
 import { icon, escapeHTML as e } from "./utils/html.js";
 import { spawny } from "../assets/spawny/manifest.js";
 import { socialHubView, mountSocialHub } from "./social-hub.js";
+import { communityLiveView, mountCommunityLive } from "./community-live.js";
 const $ = (s) => document.querySelector(s);
 const pages = {
   inicio: home,
   jugadores: playersPage,
   grupos: groupsPage,
-  comunidad: communityPage,
+  comunidad: communityLiveView,
   spawny: spawnyPage,
   social: socialHubView,
 };
@@ -46,6 +47,7 @@ const filters = {
   homeMode: "Todos",
 };
 let leaveSocial = null;
+let leaveCommunity = null;
 let currentRoute = "",
   toastTimer,
   dialogReturnFocus = "";
@@ -188,12 +190,7 @@ function restoreControls() {
     });
     renderGroups();
   }
-  if (currentRoute === "comunidad") {
-    $("#post-search").value = filters.post.query;
-    $("#post-edition").value = filters.post.edition;
-    $("#post-mode").value = filters.post.mode;
-    renderPosts();
-  }
+
   if (currentRoute === "inicio") renderHomePlayers();
 }
 function render(scroll = false) {
@@ -205,8 +202,10 @@ function render(scroll = false) {
   if (requested !== currentRoute) history.replaceState(null, "", "#inicio");
   const main = $("#main-content");
   if (leaveSocial) { leaveSocial(); leaveSocial = null; }
+  if (leaveCommunity) { leaveCommunity(); leaveCommunity = null; }
   main.innerHTML = pages[currentRoute]();
   if (currentRoute === "social") leaveSocial = mountSocialHub();
+  if (currentRoute === "comunidad") leaveCommunity = mountCommunityLive();
   main.classList.remove("page-enter");
   void main.offsetWidth;
   main.classList.add("page-enter");
