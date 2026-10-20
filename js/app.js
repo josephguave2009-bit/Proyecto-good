@@ -23,8 +23,8 @@ import {
 } from "./components/dialogs.js";
 import { icon, escapeHTML as e } from "./utils/html.js";
 import { spawny } from "../assets/spawny/manifest.js";
-import { socialHubView, mountSocialHub } from "./social-hub.js";
-import { communityLiveView, mountCommunityLive } from "./community-live.js";
+import { socialHubView, mountSocialHub } from "./social-hub.js?v=20261020e";
+import { communityLiveView, mountCommunityLive } from "./community-live.js?v=20261020e";
 const $ = (s) => document.querySelector(s);
 const pages = {
   inicio: home,
