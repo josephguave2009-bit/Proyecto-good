@@ -45,7 +45,18 @@ export const modeTabs = (active) =>
       .join("")}
   </div>`;
 export function home() {
-  return /* HTML */ `<section class="hero section-wrap">
+  return /* HTML */ `    <section class="sh-launch section-wrap" aria-label="Novedades de Spawnly Beta">
+      <div class="sh-launch-icon" aria-hidden="true">✦</div>
+      <div class="sh-launch-main">
+        <span class="sh-launch-label">SPAWNLY BETA · YA DISPONIBLE</span>
+        <h2>¡Ahora puedes hacer <span>amigos de verdad!</span></h2>
+        <p>Crea tu cuenta, busca jugadores reales, envía solicitudes, arma grupos y habla por chat. Todo en Spawnly.</p>
+        <div class="sh-launch-tags"><span>✓ Cuentas reales</span><span>✓ Amigos</span><span>✓ Mensajes y grupos</span></div>
+      </div>
+      <a class="sh-launch-button" href="#social" aria-label="Abrir registro, amigos y chat de Spawnly">Entrar a la nueva versión <span aria-hidden="true">↗</span></a>
+      <img class="sh-launch-mascot" src="assets/spawny/spawny.png" alt="" width="95" height="120" loading="eager">
+    </section>
+<section class="hero section-wrap">
       <div class="hero-copy">
         <div class="hero-eyebrow">
           <span class="status-dot"></span> TU GENTE. TU MUNDO. TU AVENTURA.
