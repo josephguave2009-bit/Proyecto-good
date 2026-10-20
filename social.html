@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verificando acceso · Spawnly</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <style>
+    body{min-height:100dvh;display:grid;place-items:center;background:#0c121e;color:#f2f5fa;
+         font-family:system-ui,sans-serif;margin:0;padding:24px}
+    main{max-width:450px;text-align:center;padding:30px;border-radius:22px;background:#182537;border:1px solid #334458}
+    img{width:125px;height:155px;object-fit:contain}
+    h1{font-size:25px}p{color:#b3c3d6;line-height:1.6}
+    a{color:#a6f46a;font-weight:700}
+  </style>
+</head>
+<body>
+  <main>
+    <img src="assets/spawny/spawny.png" alt="Spawny te saluda">
+    <h1>Preparando tu aventura…</h1>
+    <p id="status" role="status">Estamos verificando el enlace de acceso de Spawnly.</p>
+    <p><a href="index.html#social">Volver a Spawnly</a></p>
+  </main>
+  <script type="module">
+    import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./js/social-config.js";
+    // Auth must process email verification tokens *before* navigation.
+    // Otherwise the SPA router may overwrite the URL fragment containing tokens.
+    try {
+      const { createClient } = await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm");
+      const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const result = await client.auth.getSession();
+      if (result.error) throw result.error;
+      location.replace("index.html#social");
+    } catch (error) {
+      document.querySelector("#status").textContent =
+        "No pudimos verificar el enlace. Prueba abrir Spawnly e iniciar sesión de nuevo.";
+    }
+  </script>
+</body>
+</html>

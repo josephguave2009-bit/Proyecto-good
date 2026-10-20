@@ -61,8 +61,8 @@ export function home() {
           Minecraft. Porque jugar acompañado siempre es mejor.
         </p>
         <div class="hero-buttons">
-          <a class="btn btn-primary btn-lg" href="#jugadores"
-            >${icon("users", 19)} Encontrar amigos ${icon("arrowUp", 17)}</a
+          <a class="btn btn-primary btn-lg" href="#social"
+            >${icon("users", 19)} Encontrar amigos reales ${icon("arrowUp", 17)}</a
           ><a class="btn btn-secondary btn-lg" href="#comunidad"
             >Explorar comunidad ${icon("arrow", 17)}</a
           >
