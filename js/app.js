@@ -5,7 +5,7 @@ import {
   groupsPage,
   communityPage,
   spawnyPage,
-} from "./pages/views.js";
+} from "./pages/views.js?v=20261020b";
 import {
   playerCard,
   groupCard,
