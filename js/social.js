@@ -42,10 +42,10 @@ function closeChat(){chat=null;$('chat-title').textContent='Elige un amigo o un 
 async function selectChat(type,id,name){chat={type,id};$('chat-title').textContent=(type==='group'?'Grupo: ':'Chat con ')+name;$('message').disabled=false;$('send').disabled=false;await loadChat();$('message').focus();}
 async function loadChat(){
  if(!chat||!user)return;
- const current=chat;let q= db.from(current.type==='group'?'group_messages':'direct_messages').select('id,sender_id,body,created_at').order('created_at',{ascending:true}).limit(100);
+ const current=chat;let q= db.from(current.type==='group'?'group_messages':'direct_messages').select('id,sender_id,body,created_at').order('created_at',{ascending:false}).limit(100);
  if(current.type==='group')q=q.eq('group_id',current.id);
  else q=q.or(`and(sender_id.eq.${me()},receiver_id.eq.${current.id}),and(sender_id.eq.${current.id},receiver_id.eq.${me()})`);
- try{const rows=ok(await q)||[];if(chat!==current)return;const area=$('messages');area.replaceChildren(...rows.map(m=>{let bubble=element('div',m.body,'bubble'+(m.sender_id===me()?' me':''));bubble.prepend(element('small',labelName(m.sender_id)+' · '+new Date(m.created_at).toLocaleString()));return bubble;}));area.scrollTop=area.scrollHeight;}catch(e){fail(e);}
+ try{const rows=(ok(await q)||[]).reverse();if(chat!==current)return;const area=$('messages');area.replaceChildren(...rows.map(m=>{let bubble=element('div',m.body,'bubble'+(m.sender_id===me()?' me':''));bubble.prepend(element('small',labelName(m.sender_id)+' · '+new Date(m.created_at).toLocaleString()));return bubble;}));area.scrollTop=area.scrollHeight;}catch(e){fail(e);}
 }
 function startRealtime(){
  if(channel){db.removeChannel(channel);channel=null;}
