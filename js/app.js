@@ -23,6 +23,7 @@ import {
 } from "./components/dialogs.js";
 import { icon, escapeHTML as e } from "./utils/html.js";
 import { spawny } from "../assets/spawny/manifest.js";
+import { socialHubView, mountSocialHub } from "./social-hub.js";
 const $ = (s) => document.querySelector(s);
 const pages = {
   inicio: home,
@@ -30,6 +31,7 @@ const pages = {
   grupos: groupsPage,
   comunidad: communityPage,
   spawny: spawnyPage,
+  social: socialHubView,
 };
 const filters = {
   player: {
@@ -43,6 +45,7 @@ const filters = {
   post: { query: "", edition: "Todas", mode: "Todos" },
   homeMode: "Todos",
 };
+let leaveSocial = null;
 let currentRoute = "",
   toastTimer,
   dialogReturnFocus = "";
@@ -201,7 +204,9 @@ function render(scroll = false) {
   currentRoute = Object.hasOwn(pages, requested) ? requested : "inicio";
   if (requested !== currentRoute) history.replaceState(null, "", "#inicio");
   const main = $("#main-content");
+  if (leaveSocial) { leaveSocial(); leaveSocial = null; }
   main.innerHTML = pages[currentRoute]();
+  if (currentRoute === "social") leaveSocial = mountSocialHub();
   main.classList.remove("page-enter");
   void main.offsetWidth;
   main.classList.add("page-enter");
@@ -215,7 +220,7 @@ function render(scroll = false) {
   $(".main-nav").classList.remove("is-open");
   $(".menu-button").setAttribute("aria-expanded", "false");
   $(".menu-button").setAttribute("aria-label", "Abrir navegación");
-  document.title = `${{ inicio: "Aparece, conecta y juega", jugadores: "Encuentra a tu gente", grupos: "Tu próximo equipo", comunidad: "El punto de encuentro", spawny: "Conoce a Spawny" }[currentRoute]} · SPAWNLY`;
+  document.title = `${{ inicio: "Aparece, conecta y juega", jugadores: "Encuentra a tu gente", grupos: "Tu próximo equipo", comunidad: "El punto de encuentro", spawny: "Conoce a Spawny", social: "Amigos y chat" }[currentRoute]} · SPAWNLY`;
   if (scroll) {
     window.scrollTo({ top: 0, behavior: "instant" });
     main.focus({ preventScroll: true });
